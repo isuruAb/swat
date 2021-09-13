@@ -1,5 +1,11 @@
+import styles from "./index.module.scss";
+
 const Header = () => {
-  return <h1>Header goes here</h1>;
+  return (
+    <div className={styles.headerWrapper}>
+      <h1>SWAT Mobility Assignment</h1>
+    </div>
+  );
 };
 
 export default Header;

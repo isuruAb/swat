@@ -1,4 +1,4 @@
-import './App.scss';
+import "./utils/styles/custom.scss";
 import Dashboard from './containers/Dashboard';
 
 function App() {
