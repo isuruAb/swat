@@ -1,7 +1,9 @@
 import { Form } from "react-bootstrap";
 
-const TextField = ({ type, placeholder }) => {
-  return <Form.Control type={type} placeholder={placeholder} />;
+const TextField = ({ type, onChange, placeholder }) => {
+  return (
+    <Form.Control type={type} placeholder={placeholder} onChange={onChange} />
+  );
 };
 
 export default TextField;
