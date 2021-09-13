@@ -1,5 +1,6 @@
 import { Col, Row } from "react-bootstrap";
 import Card from "./Card";
+import PropTypes from "prop-types";
 import styles from "./index.module.scss";
 
 const CardList = ({ searchResult }) => {
@@ -16,6 +17,10 @@ const CardList = ({ searchResult }) => {
       </Row>
     </>
   );
+};
+
+CardList.propTypes = {
+  searchResult: PropTypes.array.isRequired
 };
 
 export default CardList;

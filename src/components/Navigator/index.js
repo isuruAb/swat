@@ -1,4 +1,5 @@
 import { Button } from "react-bootstrap";
+import PropTypes from "prop-types";
 import styles from "./index.module.scss";
 
 const Navigator = ({ onClick, pageNo }) => {
@@ -13,6 +14,11 @@ const Navigator = ({ onClick, pageNo }) => {
       </Button>
     </div>
   );
+};
+
+Navigator.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  pageNo: PropTypes.number.isRequired
 };
 
 export default Navigator;
