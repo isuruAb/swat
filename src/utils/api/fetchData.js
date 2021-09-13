@@ -1,8 +1,6 @@
 import { getUrlParams } from "./url";
 
 export const fetchPhotos = async ({ searchTerm, pageNo, pageSize }) => {
-  let clearData = [];
-
   try {
     const response = await fetch(
       process.env.REACT_APP_API_ENDPOINT +
