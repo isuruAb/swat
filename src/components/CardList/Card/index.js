@@ -7,7 +7,7 @@ const ImageCard = ({ image }) => {
     <a href={image?.links?.html} target="_blank" rel="noreferrer">
       <Card className={styles.cardWrapper}>
         <Card.Img
-          src={image?.urls?.small}
+          src={image?.urls?.thumb}
           alt={image?.alt_description}
           className={styles.imageWrapper}
         />

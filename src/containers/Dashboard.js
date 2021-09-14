@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
 import { Container } from "react-bootstrap";
 import CardList from "../components/CardList";
 import Header from "../components/Header";
@@ -28,26 +28,34 @@ const Dashboard = () => {
     let value = e.target.value;
     setSearchTerm(value);
   };
+  
+  const debouncedSearchHandler = useMemo(
+    () => debounce(searchHandler, 1000),
+    []
+  );
 
-  useEffect(() => {
-    async function fetchData() {
-      if (!searchTerm) {
-        setResult([]);
-      } else {
-        setIsLoading(true);
-        let response = await fetchPhotos({
-          searchTerm: searchTerm,
-          pageNo: pageNo,
-          pageSize: 16
-        });
-        setIsLoading(response?.loading);
-        setResult(response?.data);
-      }
+  const fetchData = useCallback(async () => {
+    if (!searchTerm) {
+      setResult([]);
+    } else {
+      setIsLoading(true);
+      let response = await fetchPhotos({
+        searchTerm: searchTerm,
+        pageNo: pageNo,
+        pageSize: 16
+      });
+      setIsLoading(response?.loading);
+      setResult(response?.data);
     }
-    fetchData()
   }, [searchTerm, pageNo]);
 
-  const debouncedSearchHandler = useMemo(()=>debounce(searchHandler, 1000), []);
+  useEffect(() => {
+    fetchData();
+
+    return () => {
+      debouncedSearchHandler.cancel();
+    };
+  }, [debouncedSearchHandler,fetchData]);
 
   return (
     <>
