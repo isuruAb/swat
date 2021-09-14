@@ -7,12 +7,14 @@ import TextField from "../components/TextField";
 import { fetchPhotos } from "../utils/api/fetchData";
 import debounce from "lodash.debounce";
 import Loader from "../components/Loader";
+import Error from "../components/Error";
 
 const Dashboard = () => {
   const [result, setResult] = useState([]);
   const [pageNo, setPageNo] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleNavigation = async (operator) => {
     if (operator === "increase") {
@@ -28,7 +30,7 @@ const Dashboard = () => {
     let value = e.target.value;
     setSearchTerm(value);
   };
-  
+
   const debouncedSearchHandler = useMemo(
     () => debounce(searchHandler, 1000),
     []
@@ -44,6 +46,7 @@ const Dashboard = () => {
         pageNo: pageNo,
         pageSize: 16
       });
+      setError(response.error);
       setIsLoading(response?.loading);
       setResult(response?.data);
     }
@@ -55,7 +58,7 @@ const Dashboard = () => {
     return () => {
       debouncedSearchHandler.cancel();
     };
-  }, [debouncedSearchHandler,fetchData]);
+  }, [debouncedSearchHandler, fetchData]);
 
   return (
     <>
@@ -66,6 +69,7 @@ const Dashboard = () => {
           type={"text"}
           placeholder={"Type something to search for images"}
         />
+        {error && <Error text={error} />}
         {isLoading ? (
           <Loader />
         ) : (
