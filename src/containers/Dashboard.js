@@ -46,9 +46,10 @@ const Dashboard = () => {
         pageNo: pageNo,
         pageSize: 16
       });
+      console.log("response",response)
       setError(response.error);
       setIsLoading(response?.loading);
-      setResult(response?.data);
+      setResult(response?.data?.results);
     }
   }, [searchTerm, pageNo]);
 

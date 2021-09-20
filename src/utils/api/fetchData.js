@@ -16,7 +16,7 @@ export const fetchPhotos = async ({ searchTerm, pageNo, pageSize }) => {
       }
     );
     let jsonData = await response.json();
-    if (jsonData.length) {
+    if (jsonData?.results?.length) {
       return {
         loading: false,
         error: false,
