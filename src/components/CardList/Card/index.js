@@ -4,15 +4,22 @@ import styles from "./index.module.scss";
 
 const ImageCard = ({ image }) => {
   return (
-    <a href={image?.links?.html} target="_blank" rel="noreferrer">
-      <Card className={styles.cardWrapper}>
-        <Card.Img
-          src={image?.urls?.thumb}
-          alt={image?.alt_description}
-          className={styles.imageWrapper}
-        />
-      </Card>
-    </a>
+    <Card className={styles.cardWrapper}>
+      <a href={image?.links?.html} target="_blank" rel="noreferrer">
+        <div className={styles.imageWrapper}>
+          <Card.Img
+            src={image?.urls?.thumb}
+            alt={image?.alt_description}
+            className={styles.image}
+          />
+        </div>
+      </a>
+
+      <Card.Body>
+        <Card.Title>{image?.user?.name}</Card.Title>
+        <Card.Text>{image?.user?.bio}</Card.Text>
+      </Card.Body>
+    </Card>
   );
 };
 
