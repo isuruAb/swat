@@ -7,7 +7,7 @@ const CardList = ({ searchResult }) => {
   return (
     <>
       <Row className={styles.rowWrapper}>
-        {searchResult.map((data) => {
+        {searchResult?.map((data) => {
           return (
             <Col md={3} className={styles.colWrapper} key={data?.id}>
               <Card image={data} />

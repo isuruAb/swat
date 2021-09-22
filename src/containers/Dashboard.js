@@ -37,20 +37,15 @@ const Dashboard = () => {
   );
 
   const fetchData = useCallback(async () => {
-    if (!searchTerm) {
-      setResult([]);
-    } else {
-      setIsLoading(true);
-      let response = await fetchPhotos({
-        searchTerm: searchTerm,
-        pageNo: pageNo,
-        pageSize: 16
-      });
-      console.log("response",response)
-      setError(response.error);
-      setIsLoading(response?.loading);
-      setResult(response?.data?.results);
-    }
+    setIsLoading(true);
+    let response = await fetchPhotos({
+      searchTerm: searchTerm,
+      pageNo: pageNo,
+      pageSize: 16
+    });
+    setError(response.error);
+    setIsLoading(response?.loading);
+    setResult(response?.data?.results || []);
   }, [searchTerm, pageNo]);
 
   useEffect(() => {
